@@ -1,174 +1,338 @@
-body {
+/* =========================================
+   1. RESET & CORE SETUP
+========================================= */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #0d0e15;
+    background: radial-gradient(circle at 50% 50%, #1a1c2e 0%, #0a0b10 100%);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #1C1C1E;
-    height: 100vh;
-    width: 100vw;
 }
 
+/* =========================================
+   2. ANIMATED BACKGROUND LIGHT ORBS
+========================================= */
+.light-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.55;
+    pointer-events: none;
+    animation: floatOrb 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 450px;
+    height: 450px;
+    background: linear-gradient(135deg, #ff6a00, #ee0979);
+    top: -10%;
+    left: 10%;
+}
+
+.orb-2 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    bottom: -15%;
+    right: 5%;
+    animation-duration: 25s;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, #8a2387, #e94057);
+    top: 40%;
+    left: 60%;
+    animation-duration: 18s;
+    animation-delay: -10s;
+}
+
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(80px, -50px) scale(1.1); }
+    66% { transform: translate(-60px, 60px) scale(0.9); }
+    100% { transform: translate(20px, -20px) scale(1.05); }
+}
+
+/* =========================================
+   3. LANDING PAGE LAYOUT
+========================================= */
+.landing-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1200px;
+    width: 90%;
+    padding: 40px 20px;
+    gap: 60px;
+}
+
+.hero-section {
+    max-width: 480px;
+    animation: fadeInRight 1s ease-out;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #00d2ff;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+}
+
+.hero-section h1 {
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ffffff, #a8b2d1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-section p {
+    color: #94a3b8;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+/* =========================================
+   4. CALCULATOR GLASS UI & ANIMATIONS
+========================================= */
 #calculator {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: hsl(0, 0%, 15%);
-    border-radius: 15px;
-    max-width: 500px;
-    overflow: hidden;
+    background: rgba(20, 22, 35, 0.55);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 400px;
+    padding: 24px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    animation: floatCalc 6s ease-in-out infinite, fadeInLeft 1s ease-out;
 }
 
+@keyframes floatCalc {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Mac-like Window Header */
+.calc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.close { background-color: #ff5f56; box-shadow: 0 0 8px #ff5f56; }
+.minimize { background-color: #ffbd2e; box-shadow: 0 0 8px #ffbd2e; }
+.maximize { background-color: #27c93f; box-shadow: 0 0 8px #27c93f; }
+
+.calc-title {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Display Screen */
 #display {
     width: 100%;
-    padding: 20px;
-    font-size: 5rem;
-    text-align: left;
+    padding: 15px;
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    text-align: right;
     border: none;
-    background-color: hsl(0, 0%, 20%);
-    color: white;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    color: #fff;
+    margin-bottom: 20px;
+    outline: none;
+    font-family: monospace;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
 }
 
+/* Glow pulse animation triggered via JS when evaluating */
+.display-glow {
+    animation: screenPulse 0.4s ease;
+}
+
+@keyframes screenPulse {
+    0% { text-shadow: 0 0 0px #00d2ff; }
+    50% { text-shadow: 0 0 20px #00d2ff; color: #00d2ff; }
+    100% { text-shadow: 0 0 0px #00d2ff; }
+}
+
+/* Button Grid */
 #keys {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    padding: 25px;
+    gap: 12px;
 }
 
 button {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    border: none;
-    background-color: hsl(0, 0%, 30%);
+    position: relative;
+    overflow: hidden;
+    height: 65px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     color: white;
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 1.6rem;
+    font-weight: 500;
     cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Hover & Active States */
 button:hover {
-    background-color: hsl(0, 0%, 40%);
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 
+                0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 button:active {
-    background-color: hsl(0, 0%, 50%);
-}
-.operator-btn{
-    background-color: hsl(39, 100%, 55%);
-}
-.operator-btn:hover{
-    background-color: hsl(35, 100%, 65%);
-}
-.operator-btn:hover{
-    background-color: hsl(35, 100%, 75%);
+    transform: translateY(1px) scale(0.96);
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-
-
-
-/* Media Queries */
-
-
-
-
-
-
-
-
-/* =========================
-   MOBILE DEVICES
-========================= */
-
-/* Extra Small Phones */
-@media (max-width: 320px) {
+/* Operator & Special Button Accents */
+.operator-btn {
+    background: rgba(255, 149, 0, 0.25);
+    border-color: rgba(255, 149, 0, 0.4);
+    color: #ffaa33;
 }
 
-/* Small Phones */
-@media (min-width: 321px) and (max-width: 480px) {
+.operator-btn:hover {
+    background: rgba(255, 149, 0, 0.45);
+    box-shadow: 0 8px 20px rgba(255, 149, 0, 0.3);
+    color: #fff;
 }
 
-/* Large Phones */
-@media (min-width: 481px) and (max-width: 600px) {
-    #calculator{
-        height: 100%;
-        width: 100%;
-
-
-    }
-
+.equals-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
 }
 
-
-/* =========================
-   TABLETS
-========================= */
-
-/* Small Tablets (Portrait) */
-@media (min-width: 601px) and (max-width: 768px) {
+.equals-btn:hover {
+    background: linear-gradient(135deg, #1adeff, #1984ff);
+    box-shadow: 0 8px 25px rgba(0, 114, 255, 0.6);
 }
 
-/* Tablets (Landscape) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    #calculator{
-        height: 100%;
-        width: 100%;
+.clear-btn {
+    grid-column: span 4;
+    background: rgba(255, 59, 48, 0.2);
+    border-color: rgba(255, 59, 48, 0.3);
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
 
+.clear-btn:hover {
+    background: rgba(255, 59, 48, 0.4);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(255, 59, 48, 0.3);
+}
 
+/* Ripple Animation Effect */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
     }
 }
 
-
-/* =========================
-   LAPTOPS
-========================= */
-
-/* Small Laptops */
-@media (min-width: 1025px) and (max-width: 1280px) {
+/* =========================================
+   5. RESPONSIVE MEDIA QUERIES
+========================================= */
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
-/* Standard Laptops */
-@media (min-width: 1281px) and (max-width: 1440px) {
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
+@media (max-width: 900px) {
+    .landing-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
 
-/* =========================
-   DESKTOPS
-========================= */
-
-/* Large Desktops */
-@media (min-width: 1441px) and (max-width: 1920px) {
+    .hero-section {
+        max-width: 100%;
+    }
+    
+    #calculator {
+        animation: none; /* Stops vertical float on mobile for better touch UX */
+    }
 }
 
-/* Extra Large / 4K Screens */
-@media (min-width: 1921px) {
-}
-
-
-/* =========================
-   ORIENTATION
-========================= */
-
-/* Portrait Mode */
-@media (orientation: portrait) {
-}
-
-/* Landscape Mode */
-@media (orientation: landscape) {
-}
-
-
-/* =========================
-   ASPECT RATIO
-========================= */
-
-/* Ultrawide Screens (21:9) */
-@media (min-aspect-ratio: 21/9) {
-}
-
-/* Widescreen (16:9) */
-@media (aspect-ratio: 16/9) {
-}
-
-/* Square / Narrow Screens */
-@media (max-aspect-ratio: 1/1) {
+@media (max-height: 700px) {
+    button {
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    #display {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
 }
