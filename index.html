@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator by Hassan</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-
 </head>
-
 <body>
-    <div id="calculator">
-        <input id="display" readonly>
-        <div id="keys">
-            <button onclick="appendToDisplay('+')" class="operator-btn">+</button>
-            <button onclick="appendToDisplay('7')">7</button>
-            <button onclick="appendToDisplay('8')">8</button>
-            <button onclick="appendToDisplay('9')">9</button>
-            <button onclick="appendToDisplay('-')" class="operator-btn">-</button>
-            <button onclick="appendToDisplay('4')">4</button>
-            <button onclick="appendToDisplay('5')">5</button>
-            <button onclick="appendToDisplay('6')">6</button>
-            <button onclick="appendToDisplay('*')" class="operator-btn">x</button>
-            <button onclick="appendToDisplay('1')">1</button>
-            <button onclick="appendToDisplay('2')">2</button>
-            <button onclick="appendToDisplay('3')">3</button>
-            <button onclick="appendToDisplay('/')"class="operator-btn">/</button>
-            <button onclick="appendToDisplay('0')">0</button>
-            <button onclick="appendToDisplay('.')" >.</button>
-            <button onclick="calculate()">=</button>
-            <button onclick="clearDisplay()" class="operator-btn">C</button>
+    <div class="light-orb orb-1"></div>
+    <div class="light-orb orb-2"></div>
+    <div class="light-orb orb-3"></div>
+
+    <main class="landing-container">
+        <header class="hero-section">
+            <span class="badge">Hassan-Bin-Usman</span>
+            <h1 class="glow-text">Pure Math.<br>Pure Focus.</h1>
+            <p>Experience ultra-responsive calculations wrapped in fluid glassmorphic UI. Built for speed, designed for delight.</p>
+        </header>
+
+        <div id="calculator" class="floating-calc">
+            <div class="calc-header">
+                <div class="window-controls">
+                    <span class="dot close"></span>
+                    <span class="dot minimize"></span>
+                    <span class="dot maximize"></span>
+                </div>
+                <span class="calc-title">Calculator</span>
+            </div>
+            
+            <input id="display" readonly placeholder="0">
+            
+            <div id="keys">
+                <button onclick="appendToDisplay('+')" class="operator-btn ripple">+</button>
+                <button onclick="appendToDisplay('7')" class="ripple">7</button>
+                <button onclick="appendToDisplay('8')" class="ripple">8</button>
+                <button onclick="appendToDisplay('9')" class="ripple">9</button>
+                <button onclick="appendToDisplay('-')" class="operator-btn ripple">-</button>
+                <button onclick="appendToDisplay('4')" class="ripple">4</button>
+                <button onclick="appendToDisplay('5')" class="ripple">5</button>
+                <button onclick="appendToDisplay('6')" class="ripple">6</button>
+                <button onclick="appendToDisplay('*')" class="operator-btn ripple">x</button>
+                <button onclick="appendToDisplay('1')" class="ripple">1</button>
+                <button onclick="appendToDisplay('2')" class="ripple">2</button>
+                <button onclick="appendToDisplay('3')" class="ripple">3</button>
+                <button onclick="appendToDisplay('/')" class="operator-btn ripple">/</button>
+                <button onclick="appendToDisplay('0')" class="ripple">0</button>
+                <button onclick="appendToDisplay('.')" class="ripple">.</button>
+                <button onclick="calculate()" class="equals-btn ripple">=</button>
+                <button onclick="clearDisplay()" class="clear-btn ripple">CLEAR</button>
+            </div>
         </div>
-    </div>
-
-
-
-
-
-
-
+    </main>
 
     <script src="index.js"></script>
 </body>
-
 </html>
